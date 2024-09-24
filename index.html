@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Information Form</title>
+    <style>
+        body {
+            background-color: rgb(184, 203, 201);
+        }
+        div {
+            position: absolute;
+            height: 450px;
+            width: 400px;
+            display: flex;
+            background: rgba(140, 118, 118, 0.144);
+            box-shadow: 0 16px 21px rgba(50, 50, 50, 0.187);
+            margin-left: 35%;
+            margin-top: 3%;
+            overflow: hidden;
+            justify-content: center;
+            align-items: center;
+            border-radius: 20px;
+        }
+        a {
+            position: absolute;
+            width: 50px;
+            height: 20px;
+            background-color: rgb(154, 202, 200);
+            border: 1px solid black;
+            border-radius: 4px;
+            color: rgb(0, 0, 0);
+            text-decoration: none;
+        }
+        a:hover {
+            background-color: rgba(62, 227, 227, 0.985);
+            color: black;
+        }
+        button {
+            background-color: rgb(154, 202, 200);
+            border: 1px solid black;
+            border-radius: 4px;
+            color: rgb(0, 0, 0);
+        }
+        button:hover {
+            background-color: rgba(62, 227, 227, 0.985);
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <center>
+        <h1><u><i>PERSONAL INFORMATION</i></u></h1>
+        <form>
+            <table>
+                <tr>
+                    <td><label>First Name:</label></td>
+                    <td><input type="text" required></td>
+                </tr>
+                <tr><td><br></td></tr>
+                <tr>
+                    <td><label>Last Name:</label></td>
+                    <td><input type="text" required></td>
+                </tr>
+                <tr><td><br></td></tr>
+                <tr>
+                    <td><label>Nick Name:</label></td>
+                    <td><input type="text" required></td>
+                </tr>
+                <tr><td><br></td></tr>
+                <tr>
+                    <td><label>Email ID:</label></td>
+                    <td><input type="email" required></td>
+                </tr>
+                <tr><td><br></td></tr>
+                <tr>
+                    <td><label>Password:</label></td>
+                    <td>
+                        <input type="password" id="password" required>
+                        <button type="button" id="togglePassword">Show</button>
+                    </td>
+                </tr>
+                <tr><td><br></td></tr>
+                <tr>
+                    <td><label>Date of Birth:</label></td>
+                    <td><input type="date" required></td>
+                </tr>
+                <tr><td><br></td></tr>
+                <tr>
+                    <td><label>Gender:</label></td>
+                    <td>
+                        <input type="radio" name="Gender" value="male" required>Male
+                        <input type="radio" name="Gender" value="female" required>Female
+                    </td>
+                </tr>
+                <tr><td><br></td></tr>
+                <tr>
+                    <td><label>Address:</label></td>
+                    <td><textarea rows="5" cols="30" required></textarea></td>
+                </tr>
+                <tr><td><br></td></tr>
+                <tr>
+                    <td><label>Mobile No:</label></td>
+                    <td><input type="number" size="10" required></td>
+                </tr>
+                <tr><td><br></td></tr>
+                <tr>
+                    <td align="center">
+                        <button type="submit">Submit</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <button type="reset">Reset</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </center>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.querySelector("form");
+            
+            // Password toggle functionality
+            const togglePassword = document.getElementById("togglePassword");
+            const passwordInput = document.getElementById("password");
+            
+            togglePassword.addEventListener("click", function () {
+                const type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
+                passwordInput.setAttribute("type", type);
+                this.textContent = type === "password" ? "Show" : "Hide";
+            });
+            
+            form.addEventListener("submit", function (event) {
+                // Prevent form submission
+                event.preventDefault();
+                
+                // Get form values
+                const firstName = form.elements[0].value.trim();
+                const lastName = form.elements[1].value.trim();
+                const nickName = form.elements[2].value.trim();
+                const email = form.elements[3].value.trim();
+                const password = passwordInput.value.trim();
+                const dob = form.elements[5].value;
+                const gender = form.elements["Gender"].value;
+                const address = form.elements[7].value.trim();
+                const mobileNo = form.elements[8].value.trim();
+
+                // Validation checks
+                if (!firstName) {
+                    alert("Please enter your first name.");
+                    return;
+                }
+                if (!lastName) {
+                    alert("Please enter your last name.");
+                    return;
+                }
+                if (!nickName) {
+                    alert("Please enter your nick name.");
+                    return;
+                }
+                if (!email) {
+                    alert("Please enter your email ID.");
+                    return;
+                }
+                if (!password) {
+                    alert("Please enter your password.");
+                    return;
+                }
+                if (!dob) {
+                    alert("Please enter your date of birth.");
+                    return;
+                }
+                if (!gender) {
+                    alert("Please select your gender.");
+                    return;
+                }
+                if (!address) {
+                    alert("Please enter your address.");
+                    return;
+                }
+                if (!mobileNo || mobileNo.length < 10) {
+                    alert("Please enter a valid mobile number.");
+                    return;
+                }
+
+                // If all validations pass
+                alert("Form submitted successfully!");
+                // Uncomment the next line to actually submit the form
+                // form.submit();
+            });
+        });
+    </script>
+</body>
+</html>
